@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'nca/base.html' %}
+{% block content %}
+    <div class="client-entry">
+        <br>
+        <h2>Victim Detail</h2>
+        <br>
+        <p><b>First Name: </b>{{ victim.first_name }}</p>
+        <p><b>Last Name: </b>{{ victim.last_name }} </p>
+        <p><b>Address: </b>{{ victim.address }}</p>
+        <p><b>City: </b>{{ victim.city }}</p>
+        <p><b>State: </b>{{ victim.state }}</p>
+        <p><b>Zip Code: </b>{{ victim.zipcode }}</p>
+        <p><b>Phone: </b>{{ victim.phone }}</p>
+        <p><b>Email: </b>{{ victim.email }}</p>
+        <p><b>Disease Type: </b>{{ victim.disease_type }}</p>
+        <p><b>Phone: </b>{{ victim.phone }}</p>
+        <p><b>Notes: </b>{{ victim.notes }}</p>
+{#        <p><b>Created date: </b>{{ victim.created_date }}</p>#}
+{#        <p><b>Updated date: </b>{{ victim.updated_date }}</p>#}
+        <br>
+
+    </div>
+    <button type="submit" class="btn btn-primary"><a href="{% url 'nca:victim_edit' victim.pk %}" style="color: white;">Edit</a></button>
+    <button type="submit" class="btn btn-primary"><a href="{% url 'nca:victim_list' %}" style="color: white;">Back To</a></button>
+{% endblock content %}
+</html>

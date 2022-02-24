@@ -1,0 +1,57 @@
+{% extends 'nca/base.html' %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+{% block content %}
+
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>NCA</title>
+
+    </head>
+    <body>
+    <style>
+        body {
+            background-color: beige;
+        }
+
+    </style>
+    <br>
+    <div class="row">
+        <h2 style="padding-left: 15Px">Notes Information</h2>
+    </div>
+    <br>
+    <br>
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+        <tr class="bg-info">
+            <th>Volunteer</th>
+            <th>Victim</th>
+            <th>Activity</th>
+            <th>Notes</th>
+            <th colspan="3">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for note_list in notes_list %}
+            <tr>
+                <td data-title="Volunteer">{{ note_list.volunteer }}</td>
+                <td data-title="Victim">{{ note_list.victim }}</td>
+                <td data-title="Activity">{{ note_list.activity }}</td>
+                <td data-title="Notes">{{ note_list.notes }}</td>
+                <td data-title="Actions">
+                <a href="{% url 'nca:volunteer_notes_edit' pk=note_list.pk %}" class="btn btn-warning">Edit</a>
+                    {#                    <td><a class="btn btn-primary">Docs</a>#}
+
+                <a href="{% url 'volunteer:volunteer_notes_delete' pk=note_list.pk %}"
+                       onclick="return confirm('Are you sure you want to delete?')"
+                       class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <p><button type="submit" class="btn btn-success"><a href="{% url 'nca:volunteer_activity_list' %}" style="color: white;">Back To</a></button></p>
+    </body>
+    </html>
+{% endblock %}

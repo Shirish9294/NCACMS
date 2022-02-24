@@ -1,0 +1,69 @@
+{% extends 'nca/base.html' %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+{% block content %}
+
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>NCA</title>
+
+    </head>
+    <body>
+    <style>
+        body {
+            background-color: beige;
+        }
+
+    </style>
+    <br>
+    <div class="row">
+        <h2 style="padding-left: 15Px">Victim Information</h2>
+    </div>
+    <br>
+    <br>
+    <form class="form-inline my-2 my-lg-0" style="display: inline; padding-right: 50px;float: left" method=POST action="{% url 'volunteer:volunteer_victim_search' %}">
+        {% csrf_token %}
+        <input class="form-control mr-sm-2" type="search" placeholder="First Name" aria-label="Search" name="search"
+               style="display: inline">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <br>
+    <br>
+    <br>
+    <br>
+        <table   class="table table-striped table-bordered table-hover">
+            <thead>
+            <tr class="bg-info">
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>City</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Disease Type</th>
+                <th>Notes</th>
+                <th colspan="1">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for victim in victim %}
+                    <tr>
+                        <td data-title="First Name">{{ victim.first_name }}</td>
+                        <td data-title="Last Name">{{ victim.last_name }}</td>
+                        <td data-title="City">{{ victim.city }}</td>
+                        <td data-title="Phone">{{ victim.phone }}</td>
+                        <td data-title="Email">{{ victim.email }}</td>
+                        <td data-title="Disease Type">{{ victim.disease_type }}</td>
+                        <td data-title="Notes">{{ victim.notes }}</td>
+                        <td data-title="Actions"><a href="{% url 'nca:volunteer_victim_detail' pk=victim.pk %}" class="btn btn-warning">View</a>
+                    {#                    <td><a class="btn btn-primary">Docs</a>#}
+                       </td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+
+    </html>
+{% endblock %}

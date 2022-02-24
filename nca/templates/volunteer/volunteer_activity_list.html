@@ -1,0 +1,119 @@
+{% extends 'nca/base.html' %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+{% block content %}
+
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>NCA</title>
+
+    </head>
+    <body>
+    <style>
+        body {
+            background-color: beige;
+        }
+
+    </style>
+    <br>
+    <div class="row">
+        <h2 style="padding-left: 15Px">Activity Information</h2>
+    </div>
+    <br>
+    <br>
+    <form class="form-inline my-2 my-lg-0" style="display: inline; padding-right: 50px;float: left" method=POST action="{% url 'volunteer:volunteer_activity_search' %}">
+        {% csrf_token %}
+        <input class="form-control mr-sm-2" type="search" placeholder="Activity Name" aria-label="Search" name="search"
+               style="display: inline">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <br>
+    <br>
+    <!-- pop up message,when we try to delete a volunteer who is associated with an activity -->
+    {% if messages %}
+        <ul class="messages" style="color:red;font-weight:bold">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <span style="display: inline;float: right">
+            <a href="{% url 'nca:volunteer_activity_new' %}" class="btn btn-primary">Add Activity</a>
+    </span>
+    <br>
+    <br>
+        <table   class="table table-striped table-bordered table-hover">
+            <thead>
+            <tr class="bg-info">
+                <th>Activity</th>
+                <th>Volunteer</th>
+                <th>Victim</th>
+                <th>Location</th>
+                <th>Description</th>
+                <th>Start Date</th>
+                <th>Notes</th>
+                <th colspan="4">Actions</th>
+            </tr>
+            </thead>
+            <tr>
+
+                {% for activity in activity %}
+
+                    <tr>
+                        <td data-title="Activity" onclick="showHideRow('hidden_row1');showHideRow('hidden_row2');showHideRow('hidden_row3');showHideRow('hidden_row4');showHideRow('hidden_row5');showHideRow('hidden_row6');showHideRow('hidden_row7');showHideRow('hidden_row8');showHideRow('hidden_row9');showHideRow('hidden_row10');">{{ activity.name }}</td>
+                        <td data-title="Volunteer" id="hidden_row1" class="hidden_row">{{ activity.volunteer }}</td>
+                        <td data-title="Victim" id="hidden_row2" class="hidden_row">{{ activity.victim }}</td>
+                        <td data-title="Location" id="hidden_row3" class="hidden_row">{{ activity.location }}</td>
+                        <td data-title="Description" id="hidden_row4" class="hidden_row">{{ activity.type }}</td>
+                        <td data-title="Start Date" id="hidden_row5" class="hidden_row">{{ activity.start_date }}</td>
+                        <td data-title="Notes" id="hidden_row6" class="hidden_row">{{ activity.notes }}</td>
+                        <td data-title="Actions" id="hidden_row7" class="hidden_row"><a href="{% url 'nca:volunteer_activity_detail' pk=activity.pk %}" class="btn btn-warning">View</a>
+                    {#                    <td><a class="btn btn-primary">Docs</a>#}
+                           {% if activity.staff == None %}
+                            <a href="{% url 'nca:volunteer_activity_delete' pk=activity.pk %}"
+                           onclick="return confirm('Are you sure you want to delete?')"
+                           class="btn btn-danger">Delete</a>
+                         {% endif %}
+                        <td id="hidden_row9" class="hidden_row"> <a href="{% url 'nca:volunteer_notes_list'  pk1=activity.pk %}" class="btn btn-primary">View Notes</a>
+                        <a href="{% url 'nca:volunteer_notes_new' pk2=activity.pk %}" class="btn btn-primary">Add Notes</a>
+
+                       </td>
+
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    {% if volunteers.has_other_pages %}
+                        <ul class="pagination">
+                            {% if volunteers.has_previous %}
+                                <li><a href="?page={{ volunteers.previous_page_number }}">&laquo;</a></li>
+                            {% else %}
+                                <li class="disabled"><span>&laquo;</span></li>
+                            {% endif %}
+                            {% for i in volunteers.paginator.page_range %}
+                                {% if volunteers.number == i %}
+                                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                                {% else %}
+                                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if volunteers.has_next %}
+                                <li><a href="?page={{ volunteers.next_page_number }}">&raquo;</a></li>
+                            {% else %}
+                                <li class="disabled"><span>&raquo;</span></li>
+                            {% endif %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+    </div>
+
+    </body>
+
+    </html>
+{% endblock %}

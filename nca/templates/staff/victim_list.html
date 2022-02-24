@@ -1,0 +1,106 @@
+{% extends 'nca/base.html' %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+{% block content %}
+
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>NCA</title>
+
+    </head>
+    <body>
+    <style>
+        body {
+            background-color: beige;
+        }
+
+    </style>
+    <br>
+    <div class="row">
+        <h2 style="padding-left: 15Px">Victim Information</h2>
+    </div>
+    <br>
+    <br>
+    <form class="form-inline my-2 my-lg-0" style="display: inline; padding-right: 50px;float: left" method=POST action="{% url 'staff:vi_search' %}">
+        {% csrf_token %}
+        <input class="form-control mr-sm-2" type="search" placeholder="First Name" aria-label="Search" name="search"
+               style="display: inline">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <br>
+    <br>
+    <!-- pop up message,when we try to delete a volunteer who is associated with an activity -->
+   {% if messages %}
+        <ul class="messages" style="color:red;font-weight:bold">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <br>
+    <span style="display: inline;float: right">
+            <a href="{% url 'nca:victim_new' %}" class="btn btn-primary">Add Victim</a>
+    </span>
+    <br>
+    <br>
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+        <tr class="bg-info">
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Disease Type</th>
+            <th>Notes</th>
+            <th colspan="3">Actions</th>
+        </tr>
+
+        </thead>
+        <tbody>
+        {% for victim in victims %}
+            <tr>
+                <td>{{ victim.first_name }}</td>
+                <td>{{ victim.last_name }}</td>
+                <td>{{ victim.email }}</td>
+                <td>{{ victim.disease_type }}</td>
+                <td>{{ victim.notes }}</td>
+                <td><a href="{% url 'nca:victim_detail' pk=victim.pk %}" class="btn btn-warning">View</a>
+                <td><a href="{% url 'nca:victim_delete' pk=victim.pk %}"
+                       onclick="return confirm('Are you sure you want to delete?')"
+                       class="btn btn-danger">Delete</a>
+                </td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    {% if victims.has_other_pages %}
+                        <ul class="pagination">
+                            {% if victims.has_previous %}
+                                <li><a href="?page={{ victims.previous_page_number }}">&laquo;</a></li>
+                            {% else %}
+                                <li class="disabled"><span>&laquo;</span></li>
+                            {% endif %}
+                            {% for i in victims.paginator.page_range %}
+                                {% if victims.number == i %}
+                                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                                {% else %}
+                                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if victims.has_next %}
+                                <li><a href="?page={{ victims.next_page_number }}">&raquo;</a></li>
+                            {% else %}
+                                <li class="disabled"><span>&raquo;</span></li>
+                            {% endif %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+    </div>
+    </body>
+    </html>
+{% endblock %}

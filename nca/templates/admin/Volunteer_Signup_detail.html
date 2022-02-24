@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'nca/base.html' %}
+{% block content %}
+    <div class="client-entry">
+        <br>
+        <h2>Volunteer Details</h2>
+        <br>
+        <br>
+        <p><b>First Name: </b>{{ volunteer.first_name }}</p>
+        <p><b>Last Name: </b>{{ volunteer.last_name }} </p>
+        <p><b>Address: </b>{{ volunteer.address }}</p>
+        <p><b>City: </b>{{ volunteer.city }}</p>
+        <p><b>State: </b>{{ volunteer.state }}</p>
+        <p><b>Phone: </b>{{ volunteer.phone }}</p>
+        <p><b>Email: </b>{{ volunteer.email }}</p>
+        <p><b>Zipcode: </b>{{ volunteer.zipcode }}</p>
+        <p><b>Experience: </b>{{ volunteer.Experience }}</p>
+        <br>
+    </div>
+    <button type="submit" class="btn btn-primary"><a href="{% url 'admins:volunteersignup_list' %}" style="color: white;">Back To</a></button>
+{% endblock content %}

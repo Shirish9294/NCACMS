@@ -1,0 +1,17 @@
+{% extends 'nca/base.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+{% load crispy_forms_tags %}
+{% block content %}
+    <h1>ACtivity Notes</h1>
+    <form method="post">
+    {% csrf_token %}
+          <div class="form-row">
+      <div class="form-group col-md-6 mb-0" style="">
+            {{ form.notes|as_crispy_field }}
+          <button type="submit" class="btn btn-primary">Add</button>
+      </div>
+      </div>
+    </form>
+{% endblock %}

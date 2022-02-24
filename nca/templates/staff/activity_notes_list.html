@@ -1,0 +1,50 @@
+{% extends 'nca/base.html' %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+{% block content %}
+
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>NCA</title>
+
+    </head>
+    <body>
+    <style>
+        body {
+            background-color: beige;
+        }
+
+    </style>
+    <br>
+    <div class="row">
+        <h2 style="padding-left: 15Px">Notes Information</h2>
+    </div>
+    <br>
+    <br>
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+        <tr class="bg-info">
+            <th>Volunteer</th>
+            <th>Victim</th>
+            <th>Activity</th>
+            <th>Notes</th>
+            <!--<th colspan="3">Actions</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        {% for note_list in notes_list %}
+            <tr>
+                <td>{{ note_list.volunteer }}</td>
+                <td>{{ note_list.victim }}</td>
+                <td>{{ note_list.activity }}</td>
+                <td>{{ note_list.notes }}</td>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <p><button type="submit" class="btn btn-success"><a href="{% url 'nca:activity_list' %}" style="color: white;">Back To</a></button></p>
+    </body>
+    </html>
+{% endblock %}

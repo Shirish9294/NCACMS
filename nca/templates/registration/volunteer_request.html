@@ -1,0 +1,21 @@
+{% extends 'nca/base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% block content %}
+<body>
+    <br>
+    <h1>Volunteer Joining Request Form</h1>
+    <br>
+    <form method="POST" class=" ">{% csrf_token %}
+            {{ form|crispy }}
+        <br>
+        <button type="submit" class="save btn btn-primary" style="background-color: #4CAF50; /* Green */
+                                          border: none;
+                                          color: white;
+                                          padding: 15px 32px;
+                                          text-align: center;
+                                          text-decoration: none;
+                                          display: inline-block;
+                                          font-size: 16px;">Save</button>
+    </form>
+{% endblock %}

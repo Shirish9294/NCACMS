@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'nca/base.html' %}
+
+{% block content %}
+    <div class="client-entry">
+        <br>
+        <h2>Activity Detail</h2>
+        <br>
+        <p><b>Name: </b>{{ activity.name }}</p>
+        <p><b>Location: </b>{{ activity.location }} </p>
+        <p><b>Description: </b>{{ activity.description }}</p>
+        <p><b>Type: </b>{{ activity.type }}</p>
+        <p><b>Start Date: </b>{{ activity.start_date }}</p>
+        <p><b>End Date: </b>{{ activity.end_date }}</p>
+{#        <p><b>Created date: </b>{{ activity.created_date }}</p>#}
+{#        <p><b>Updated date: </b>{{ activity.updated_date }}</p>#}
+        <p><b>Notes: </b>{{ activity.notes }}</p>
+    </div>
+    <br>
+    <!-- pop up message,when we try to delete a volunteer who is associated with an activity -->
+    {% if messages %}
+        <ul class="messages" style="color:red;font-weight:bold">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% if activity.staff == None %}
+    <p><button type="submit" class="btn btn-success"><a href="{% url 'nca:volunteer_activity_edit' activity.pk %}" style="color: white;">Edit</a></button></p>
+    {% endif %}
+
+    <p><button type="submit" class="btn btn-success"><a href="{% url 'nca:volunteer_activity_list' %}" style="color: white;">Back To</a></button></p>
+{% endblock content %}
+</html>

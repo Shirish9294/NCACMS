@@ -1,0 +1,1 @@
+web: gunicorn ISQA8210_T1_NCACMS.wsgi --log-file -

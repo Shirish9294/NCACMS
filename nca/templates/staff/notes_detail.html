@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'nca/base.html' %}
+
+{% block content %}
+    <div class="client-entry">
+        <br>
+        <h2>Notes Detail</h2>
+        <br>
+        <br>
+        <p><b>Volunteer: </b>{{ notes.volunteer }}</p>
+        <p><b>Victim: </b>{{ notes.victim }} </p>
+        <p><b>Activity: </b>{{ notes.activity }}</p>
+        <p><b>Notes: </b>{{ notes.notes }}</p>
+
+        <p><b>Updated date: </b>{{ notes.updated_date }}</p>
+
+    </div>
+    <br>
+
+    <p><button type="submit" class="btn btn-success"><a href="{% url 'nca:show-notifications'   %}" style="color: white;">Back To</a></button></p>
+{% endblock content %}
+</html>

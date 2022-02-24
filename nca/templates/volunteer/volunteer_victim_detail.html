@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'nca/base.html' %}
+
+{% block content %}
+    <div class="client-entry">
+        <br>
+        <h2>Victim Detail</h2>
+        <br>
+        <p><b>First Name: </b>{{ victim.first_name }}</p>
+        <p><b>Last Name: </b>{{ victim.last_name }} </p>
+        <p><b>City: </b>{{ victim.city }}</p>
+        <p><b>Phone: </b>{{ victim.phone }}</p>
+        <p><b>Email: </b>{{ victim.email }}</p>
+        <p><b>Disease Type: </b>{{ victim.disease_type }}</p>
+{#        <p><b>Created date: </b>{{ victim.created_date }}</p>#}
+{#        <p><b>Updated date: </b>{{ victim.updated_date }}</p>#}
+        <p><b>Notes: </b>{{ victim.notes }}</p>
+    </div>
+    <br>
+    <p><button type="submit" class="btn btn-success"><a href="{% url 'nca:volunteer_victim_list' %}" style="color: white;">Back To</a></button></p>
+{% endblock content %}
+</html>

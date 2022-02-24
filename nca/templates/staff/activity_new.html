@@ -1,0 +1,31 @@
+{% extends 'nca/base.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <br>
+    <h2>New Activity</h2>
+    <br>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-md-6 mb-0">
+                {{ form.staff|as_crispy_field }}
+                {{ form.volunteer|as_crispy_field }}
+                {{ form.victim|as_crispy_field }}
+                {{ form.location|as_crispy_field }}
+                {{ form.name|as_crispy_field }}
+                {{ form.description|as_crispy_field }}
+                {{ form.type|as_crispy_field }}
+                {{ form.start_date|as_crispy_field }}
+                {{ form.end_date|as_crispy_field }}
+{#                {{ form.created_date|as_crispy_field }}#}
+{#                {{ form.updated_date|as_crispy_field }}#}
+                {{ form.notes|as_crispy_field }}
+                <br>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+
+    </form>
+{% endblock %}

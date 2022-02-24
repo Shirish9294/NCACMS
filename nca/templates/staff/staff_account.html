@@ -1,0 +1,23 @@
+{% extends 'nca/base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <br>
+    <h2>Account Details</h2>
+    <br>
+    <p><b>User Name: </b>{{ user }}</p>
+    <p><b>First Name: </b>{{ user.first_name }}</p>
+    <p><b>Last Name: </b>{{ user.last_name }}</p>
+    <p><b>Email: </b>{{ user.email }}</p>
+    <p><b>Phone No: </b>{{ staff.phone }}</p>
+</div>
+<button type="submit" class="btn btn-primary"><a href="{% url 'staff:staff_edit' %}" style="color: white;">Edit</a></button>
+</body>
+</html>
+{% endblock %}

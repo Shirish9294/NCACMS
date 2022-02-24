@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'nca/base.html' %}
+
+{% block content %}
+    <div class="client-entry">
+        <br>
+        <h2>Location Detail</h2>
+        <br>
+        <p><b>Name: </b>{{ location.name }}</p>
+        <p><b>Address: </b>{{ location.address }} </p>
+        <p><b>Type: </b>{{ location.type }}</p>
+        <p><b>City: </b>{{ location.city }}</p>
+        <p><b>State: </b>{{ location.state }}</p>
+        <p><b>Zipcode: </b>{{ location.zipcode }}</p>
+{#        <p><b>Created date: </b>{{ location.created_date }}</p>#}
+{#        <p><b>Updated date: </b>{{ location.updated_date }}</p>#}
+    </div>
+    <br>
+    <p><button type="submit" class="btn btn-success"><a href="{% url 'nca:location_edit' location.pk %}" style="color: white;">Edit</a></button></p>
+    <p><button type="submit" class="btn btn-success"><a href="{% url 'nca:location_list' %}" style="color: white;">Back To</a></button></p>
+{% endblock content %}
+</html>
